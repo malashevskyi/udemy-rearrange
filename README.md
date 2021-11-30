@@ -1,10 +1,14 @@
 Chrome extension for udemy rearrange. Disable 'Course content' component and move 'Overview, Q&A, Notes, Announcements'
 
+DEMO - [https://www.youtube.com/watch?v=DkUP4wES5Bw](https://www.youtube.com/watch?v=DkUP4wES5Bw)
+
 ### Extension
 
 I didn't publish it in chrome store, if you think it is useful you can use it locally
 
-- download and go to [chrome://extensions/](chrome://extensions/) and press `Load unpacked` to load your extension
+1. ```git clone git@github.com:malashevskyi/udemy-rearrange.git```
+2. go to `chrome://extensions/`
+3. press `Load unpacked` to load your extension
 
 ### Why:
 
