@@ -1,6 +1,6 @@
 Chrome extension for udemy rearrange. Disable 'Course content' component and move 'Overview, Q&A, Notes, Announcements'
 
-How it works - [https://www.youtube.com/watch?v=DkUP4wES5Bw](https://www.youtube.com/watch?v=DkUP4wES5Bw)
+DEMO - [https://www.youtube.com/watch?v=DkUP4wES5Bw](https://www.youtube.com/watch?v=DkUP4wES5Bw)
 
 ### Extension
 
