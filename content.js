@@ -1,3 +1,5 @@
+let notesEl
+
 function blockScroll() {
   document.body.classList.add('scrollBarHidden')
 }
@@ -7,29 +9,14 @@ function unblockScroll() {
 function getScrollbarWidth() {
   return window.innerWidth - document.documentElement.clientWidth
 }
-
-chrome.runtime.onMessage.addListener((message) => {
+function addStyle() {
   const scrollbarWidth = getScrollbarWidth()
 
-  const notesEl = document.querySelector(
-    '.ud-app-loader main > div > div:nth-child(3)'
-  )
-
-  const sStyle = document.getElementById('ud-rearrange-components')
-
-  // remove if style has already set
-  if (sStyle) {
-    sStyle.parentNode.removeChild(sStyle)
-
-    notesEl.removeEventListener('mouseenter', blockScroll)
-    notesEl.removeEventListener('mouseleave', unblockScroll)
-
-    return true
-  }
-
   // block body scroll if mouse is over notes block
-  notesEl.addEventListener('mouseenter', blockScroll)
-  notesEl.addEventListener('mouseleave', unblockScroll)
+  if (notesEl) {
+    notesEl.addEventListener('mouseenter', blockScroll)
+    notesEl.addEventListener('mouseleave', unblockScroll)
+  }
 
   const style = document.createElement('style')
   style.setAttribute('id', 'ud-rearrange-components')
@@ -65,6 +52,38 @@ chrome.runtime.onMessage.addListener((message) => {
   style.innerHTML = css
 
   document.head.append(style)
+}
+
+function removeStyle(sStyle) {
+  sStyle.parentNode.removeChild(sStyle)
+
+  if (notesEl) {
+    notesEl.removeEventListener('mouseenter', blockScroll)
+    notesEl.removeEventListener('mouseleave', unblockScroll)
+  }
+}
+
+window.addEventListener('resize', () => {
+  const sStyle = document.getElementById('ud-rearrange-components')
+  if (sStyle) {
+    removeStyle(sStyle)
+  }
+})
+
+chrome.runtime.onMessage.addListener((message) => {
+  const sStyle = document.getElementById('ud-rearrange-components')
+  notesEl = document.querySelector(
+    '.ud-app-loader main > div > div:nth-child(3)'
+  )
+
+  // remove if style has already set
+  if (sStyle) {
+    removeStyle(sStyle)
+
+    return true
+  }
+
+  addStyle()
 
   return true
 })
